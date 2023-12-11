@@ -18,8 +18,7 @@ public:
 private:
 	int recordCount;
 	std::vector<Record*> records;	// delete this vector. Load only the required record 
-
-
+	string filename;
 
 public:
 	DataFile();
@@ -31,7 +30,10 @@ public:
 	int GetRecordCount() { return recordCount; };
 
 	void Save(string filename);
+	// initialize a datafile
 	void Load(string filename);
+	// Load individual Record from datafile
+	void LoadRecord(int index);
 
 private:
 	void Clear();

@@ -21,6 +21,7 @@
 
 #include "raylib.h"
 #include "DataFile.h"
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -43,6 +44,8 @@ int main(int argc, char* argv[])
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
+    std::cout << GetTime() << std::endl;
+
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -51,6 +54,7 @@ int main(int argc, char* argv[])
         // TODO: Update your variables here
         //----------------------------------------------------------------------------------
 
+        // get prevoius data entry
         if (IsKeyPressed(KEY_LEFT))
         {
             currentRecordIdx--;
@@ -58,19 +62,25 @@ int main(int argc, char* argv[])
             {
                 currentRecordIdx = 0;
             }
-            currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            else { // only get item if it is a new item
+                currentRecord = data.GetRecord(currentRecordIdx);
+                UnloadTexture(recordTexture);
+                recordTexture = LoadTextureFromImage(currentRecord->image);
+            }
         }
-
+        // get next data entry
         if (IsKeyPressed(KEY_RIGHT))
         {
             currentRecordIdx++;
             if (currentRecordIdx >= data.GetRecordCount())
             {
-                currentRecordIdx = data.GetRecordCount();
+                currentRecordIdx = data.GetRecordCount() - 1;
             }
-            currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            else { // only get item if it is a new item
+                currentRecord = data.GetRecord(currentRecordIdx);
+                UnloadTexture(recordTexture);
+                recordTexture = LoadTextureFromImage(currentRecord->image);
+            }
         }
 
 
