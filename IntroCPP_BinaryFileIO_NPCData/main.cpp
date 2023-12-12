@@ -21,7 +21,6 @@
 
 #include "raylib.h"
 #include "DataFile.h"
-#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -43,8 +42,6 @@ int main(int argc, char* argv[])
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
-
-    std::cout << GetTime() << std::endl;
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key

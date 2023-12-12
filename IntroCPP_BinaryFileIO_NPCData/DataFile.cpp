@@ -6,7 +6,7 @@ using namespace std;
 DataFile::DataFile()
 {
 	recordCount = 0;
-	filename = "";
+	filename.clear();
 }
 
 DataFile::~DataFile()
@@ -31,7 +31,7 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 DataFile::Record* DataFile::GetRecord(int index)
 {
 	// check the file has been initalized
-	if (filename == "") { throw "A file has not been initalized; call `void Load(string)` to initialize a file"; }
+	if (filename.empty() && index >= records.size()) { throw "A file has not been initalized; call `void Load(string)` to initialize a file"; }
 	// check the index is not out of bounds
 	if (index > recordCount) { throw "`index` out of bounds"; }
 	// load more records if they are not enough
